@@ -1,12 +1,9 @@
-async function enviarScript(scriptText: string, delay: number = 1000): Promise<number> {
+async function enviarScript(scriptText, delay = 1000) {
     const lines = scriptText.split('\n').map(line => line.trim()).filter(line => line);
 
     const main = document.querySelector("#main");
-    if (!main) {
-        throw new Error("Elemento principal não encontrado");
-    }
+    const textarea = main.querySelector(`div[contenteditable="true"]`);
 
-    const textarea = main.querySelector<HTMLDivElement>('div[contenteditable="true"]');
     if (!textarea) {
         throw new Error("Não há uma conversa aberta");
     }
@@ -19,12 +16,8 @@ async function enviarScript(scriptText: string, delay: number = 1000): Promise<n
 
         await new Promise(resolve => setTimeout(resolve, 100));
 
-        const sendButton = main.querySelector<HTMLButtonElement>('[data-testid="send"], [data-icon="send"]');
-        if (sendButton) {
-            sendButton.click();
-        } else {
-            console.warn("Botão de enviar não encontrado");
-        }
+        const sendButton = main.querySelector(`[data-testid="send"]`) || main.querySelector(`[data-icon="send"]`);
+        sendButton.click();
 
         if (lines.indexOf(line) !== lines.length - 1) {
             await new Promise(resolve => setTimeout(resolve, delay));
@@ -35,9 +28,12 @@ async function enviarScript(scriptText: string, delay: number = 1000): Promise<n
 }
 
 const script = `
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
 `;
 
 enviarScript(script, 2000)
     .then(e => console.log(`Código finalizado, ${e} mensagens enviadas`))
     .catch(console.error);
+    
