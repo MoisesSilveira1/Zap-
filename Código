@@ -29,7 +29,9 @@ async function enviarScript(scriptText, delay = 1000) {
 
 const script = `
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxx (coloque sua mensagem aqui) xxxxxxxxxxxxx
+xxxxxxxxx (coloque sua mensagem aqui) xxxxxxxxxxxxx
+xxxxxxxxx (coloque sua mensagem aqui) xxxxxxxxxxxxx
 
 `;
 
